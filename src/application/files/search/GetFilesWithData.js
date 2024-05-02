@@ -22,6 +22,7 @@ export const GetFilesWithData = async (_, res) => {
 
     console.time('Parseo de archivos')
 
+    // Este codigo se repite, puede ir en un helper o en un servicio
     for (let i = 0; i < fileDataResults.length; i++) {
       const fileData = fileDataResults[i]
       if (fileData) {
