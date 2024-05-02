@@ -1,7 +1,7 @@
 import CustomFile from '../../../domain/File.js'
 import { getFileDataFromExternalAPIService, getFileNamesFromExternalAPIService } from '../../../infraestructure/service/FileServices.js'
 
-export const GetFileNamesFromExternalAPI = async (_, res) => {
+export const GetFilesWithData = async (_, res) => {
   try {
     const dataResponse = []
 
