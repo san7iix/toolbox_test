@@ -2,47 +2,55 @@ import CustomFile from "../../../domain/File.js";
 import { getFileDataFromExternalAPIService, getFileNamesFromExternalAPIService } from "../../../infraestructure/service/FileServices.js";
 
 export const GetFileNamesFromExternalAPI = async (_, res) => {
+    try {
+        const dataResponse = [];
 
-    const dataResponse = []
+        const response = await getFileNamesFromExternalAPIService();
 
-    // Obtenemos los nombres de los archivos de la API externa
-    const response = await getFileNamesFromExternalAPIService();
-
-    // Debemos buscar la data de cada archivo, procesarla y devolverla
-    for (let i = 0; i < response.length; i++) {
-        try {
-            const fileData = await getFileDataFromExternalAPIService(response[i]);
-
-            // Obtenemos la data del archivo y la parseamos haciendo un split de los datos
-            let splitedData = fileData.split('\n');
-
-            // Obtenemos las líneas del archivo
-            if (Array.isArray(splitedData)) {
-                // Quitamos las cabezeras
-                splitedData.shift();
+        const fileDataPromises = response.map(async (fileName) => {
+            try {
+                const fileData = await getFileDataFromExternalAPIService(fileName);
+                return fileData;
             }
+            catch (error) {
+                console.warn('Omitiendo archivo: ' + fileName + ' debido a un error');
+                console.error(error);
+                return null;
+            }
+        });
 
-            // Por cada ejecutamos el metodo parseFileData
-            for (let j = 0; j < splitedData.length; j++) {
-                try {
-                    const fileDataParsed = new CustomFile();
-                    fileDataParsed.parseFileData(splitedData[j]);
-                    dataResponse.push(fileDataParsed);
+        const fileDataResults = await Promise.all(fileDataPromises);
+
+        console.time('Parseo de archivos');
+
+        for (let i = 0; i < fileDataResults.length; i++) {
+            const fileData = fileDataResults[i];
+            if (fileData) {
+                let splitedData = fileData.split('\n');
+                if (Array.isArray(splitedData)) {
+                    splitedData.shift();
                 }
-                catch (error) {
-                    console.warn('Omitiendo archivo: ' + response[i] + ' debido a un error')
-                    console.error(error);
+                for (let j = 0; j < splitedData.length; j++) {
+                    try {
+                        const fileDataParsed = new CustomFile();
+                        fileDataParsed.parseFileData(splitedData[j]);
+                        dataResponse.push(fileDataParsed);
+                    }
+                    catch (error) {
+                        console.warn('Omitiendo archivo: ' + response[i] + ' debido a un error');
+                        console.error(error);
+                    }
                 }
             }
         }
-        catch (error) {
-            console.warn('Omitiendo archivo: ' + response[i] + ' debido a un error')
-            console.error(error);
-        }
+
+        console.timeEnd('Parseo de archivos');
+
+        res.status(200).json(dataResponse);
     }
-
-    // console.log(dataResponse);
-
-    res.status(200).json(dataResponse);
-
+    catch (error) {
+        console.warn('Error al obtener los nombres de los archivos de la API externa');
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
