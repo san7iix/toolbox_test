@@ -1,0 +1,27 @@
+{
+  "name": "backend_toolbox",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Backend creado para la prueba técnica de la empresa Toolbox. Este backend se encarga de retornar y hacer una adaptación de los archivos que provee su API en formato CSV a formato JSON.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "toolbox",
+    "prueba",
+    "JSON",
+    "CSV"
+  ],
+  "author": "San7iix",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
