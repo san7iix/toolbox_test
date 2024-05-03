@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { GetFilesList } from '../../application/files/search/GetFilesList.js'
-import { GetFilesWithData } from '../../application/files/search/GetFilesWithData.js'
-import { GetFileData } from '../../application/files/search/GetFileData.js'
+import { GetFilesList } from '../../application/files/search/GetFilesList.mjs'
+import { GetFilesWithData } from '../../application/files/search/GetFilesWithData.mjs'
+import { GetFileData } from '../../application/files/search/GetFileData.mjs'
 
 const filesRoutes = Router()
 

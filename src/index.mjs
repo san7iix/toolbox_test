@@ -1,4 +1,4 @@
-import { app } from './infraestructure/server.js'
+import { app } from './infraestructure/server.mjs'
 
 const port = process.env.PORT || 8000
 

@@ -1,7 +1,7 @@
 import express, { json, urlencoded } from 'express'
 import cors from 'cors'
-import { filesRoutes } from './routes/filesRoutes.js'
-import { errorHandler } from './middlewares/errorhandler.middleware.js'
+import { filesRoutes } from './routes/filesRoutes.mjs'
+import { errorHandler } from './middlewares/errorhandler.middleware.mjs'
 
 const app = express()
 

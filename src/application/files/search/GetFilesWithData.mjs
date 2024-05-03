@@ -1,5 +1,5 @@
-import CustomFile from '../../../domain/File.js'
-import { getFileDataFromExternalAPIService, getFileNamesFromExternalAPIService } from '../../../infraestructure/service/FileServices.js'
+import CustomFile from '../../../domain/File.mjs'
+import { getFileDataFromExternalAPIService, getFileNamesFromExternalAPIService } from '../../../infraestructure/service/FileServices.mjs'
 
 export const GetFilesWithData = async (_, res) => {
   try {
@@ -22,9 +22,9 @@ export const GetFilesWithData = async (_, res) => {
 
     console.time('Parseo de archivos')
 
-    // Este codigo se repite, puede ir en un helper o en un servicio
     for (let i = 0; i < fileDataResults.length; i++) {
       const fileData = fileDataResults[i]
+      // Este codigo se repite, puede ir en un helper o en un servicio
       if (fileData) {
         const splitedData = fileData.split('\n')
         if (Array.isArray(splitedData)) {

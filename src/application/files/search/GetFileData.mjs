@@ -1,5 +1,5 @@
-import CustomFile from "../../../domain/File.js"
-import { getFileDataFromExternalAPIService } from "../../../infraestructure/service/FileServices.js"
+import CustomFile from "../../../domain/File.mjs"
+import { getFileDataFromExternalAPIService } from "../../../infraestructure/service/FileServices.mjs"
 
 export const GetFileData = async (req, res) => {
 
