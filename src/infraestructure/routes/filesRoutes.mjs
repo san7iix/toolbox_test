@@ -6,13 +6,25 @@ import { GetFileData } from '../../application/files/search/GetFileData.mjs'
 const filesRoutes = Router()
 
 filesRoutes.get('/data', (req, res) => {
-    if (!req.query.fileName && req.query.fileName !== '') {
-        GetFilesWithData(req, res)
-        return
-    }
+    try {
+        if (!req.query.fileName && req.query.fileName !== '') {
+            GetFilesWithData(req, res)
+            return
+        }
 
-    GetFileData(req, res)
+        GetFileData(req, res)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Internal Server Error' })
+    }
 })
-filesRoutes.get('/list', (req, res) => GetFilesList(req, res))
+filesRoutes.get('/list', (req, res) => {
+    try {
+        GetFilesList(req, res)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Internal Server Error' })
+    }
+})
 
 export { filesRoutes }
