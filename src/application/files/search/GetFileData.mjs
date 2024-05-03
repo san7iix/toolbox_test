@@ -5,7 +5,10 @@ export const GetFileData = async (req, res) => {
 
     const { fileName } = req.query
 
-    if (!fileName) throw new Error('fileName is required')
+    if (!fileName) {
+        res.status(400).json({ error: 'fileName is required' })
+        return
+    }
 
     const fileData = await getFileDataFromExternalAPIService(fileName)
 
@@ -24,7 +27,7 @@ export const GetFileData = async (req, res) => {
                 dataResponse.push(fileDataParsed)
             } catch (error) {
                 console.warn('Omitiendo archivo: debido a un error')
-                console.error(error)
+                // console.error(error)
             }
         }
     }

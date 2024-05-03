@@ -13,7 +13,7 @@ export const GetFilesWithData = async (_, res) => {
         return fileData
       } catch (error) {
         console.warn('Omitiendo archivo: ' + fileName + ' debido a un error')
-        console.error(error)
+        // console.error(error)
         return null
       }
     })
@@ -37,7 +37,6 @@ export const GetFilesWithData = async (_, res) => {
             dataResponse.push(fileDataParsed)
           } catch (error) {
             console.warn('Omitiendo archivo: ' + response[i] + ' debido a un error')
-            console.error(error)
           }
         }
       }

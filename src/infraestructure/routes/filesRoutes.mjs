@@ -6,7 +6,10 @@ import { GetFileData } from '../../application/files/search/GetFileData.mjs'
 const filesRoutes = Router()
 
 filesRoutes.get('/data', (req, res) => {
-    if (!req.query.fileName) GetFilesWithData(req, res)
+    if (!req.query.fileName && req.query.fileName !== '') {
+        GetFilesWithData(req, res)
+        return
+    }
 
     GetFileData(req, res)
 })
