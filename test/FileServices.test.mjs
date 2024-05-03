@@ -56,11 +56,12 @@ describe('Files service', () => {
 
   it('Should return a fileData and can parse it', async () => {
     // Debería retornar un array de CustomFile
-    const fileData = await getFileDataFromExternalAPIService('test3.csv');
+    const fileName = 'test3.csv'
+    const fileData = await getFileDataFromExternalAPIService(fileName);
 
     const dataResponse = []
 
-    parseFileData(fileData, dataResponse)
+    parseFileData(fileData, dataResponse, fileName)
 
     // Verificar que dataResponse sea un array
     expect(dataResponse).to.be.an('array');
@@ -83,7 +84,7 @@ describe('Files service', () => {
 
     // La funcion deberia retornar un array vacio
     expect(() => parseFileData(fileData, dataResponse)).to.have.length(0);
-    
+
   });
 
 });
