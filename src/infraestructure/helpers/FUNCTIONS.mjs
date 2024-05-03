@@ -2,6 +2,15 @@ import CustomFile from "../../domain/File.mjs"
 
 export const parseFileData = (fileData, arrayResponse) => {
     if (fileData) {
+
+        if (!fileData.includes('file,text,number,hex')) {
+            throw new Error('Data is invalid, no se encontró la cabecera del archivo')
+        }
+
+        if (fileData.includes(';')) {
+            throw new Error('Data is invalid')
+        }
+
         const splitedData = fileData.split('\n')
         if (Array.isArray(splitedData)) {
             splitedData.shift()
