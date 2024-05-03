@@ -1,29 +1,52 @@
 class CustomFile {
-  constructor () {
-    this.name = ''
-    this.text = ''
-    this.number = 0
-    this.hex = ''
+  constructor(data, fileName) {
+    this.file = fileName
+    this.lines = []
+
+    if (data) {
+      this.parseAndAssignLines(data)
+    }
   }
 
-  parseFileData (data) {
+  parseAndAssignLines(data) {
     if (!data) throw new Error('Data is required')
-    if (typeof data !== 'string') throw new Error('Data must be a string')
 
-    const dataSplitted = data.split(',')
+    if (!Array.isArray(data)) throw new Error('Data must be a array')
 
-    const name = dataSplitted[0] // Nombre del archivo
-    const text = dataSplitted[1] // Texto del archivo
-    const number = parseInt(dataSplitted[2]) // Número del archivo
-    const hex = dataSplitted[3] // Hexadecimal del archivo
+    if (data.length === 0) {
+      this.lines = []
+    }
 
-    // Validamos que los datos sean correctos y no estén vacíos
-    if (!name || !text || !number || !hex) throw new Error('Data is invalid')
+    // Para cada una de las líneas del archivo
+    for (let i = 0; i < data.length; i++) {
 
-    this.name = name
-    this.text = text
-    this.number = number
-    this.hex = hex
+      const dataSplitted = data[i].split(',')
+
+      const text = dataSplitted[1] // Texto del archivo
+      const number = parseInt(dataSplitted[2]) // Número del archivo
+      const hex = dataSplitted[3] // Hexadecimal del archivo
+
+      // Validamos que los datos sean correctos y no estén vacíos
+      if (text && number && hex) {
+
+        this.lines.push({
+          text,
+          number,
+          hex
+        })
+      } else {
+        console.warn(`Omitiendo línea ${i} debido a que no tiene todos los datos necesarios, falta alguno de los siguientes: ${text}, ${number}, ${hex}`)
+      }
+    }
+
+    return this
+  }
+
+  setName(name) {
+    if (!name) throw new Error('Name is required')
+    if (typeof name !== 'string') throw new Error('Name must be a string')
+
+    this.file = name
 
     return this
   }

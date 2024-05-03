@@ -15,7 +15,7 @@ export const GetFileData = async (req, res) => {
 
     const dataResponse = []
 
-    parseFileData(fileData, dataResponse)
+    parseFileData(fileData, dataResponse, fileName)
 
     res.status(200).json(dataResponse)
 
