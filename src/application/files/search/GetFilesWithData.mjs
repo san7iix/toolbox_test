@@ -1,4 +1,5 @@
 import CustomFile from '../../../domain/File.mjs'
+import { parseFileData } from '../../../infraestructure/helpers/FUNCTIONS.mjs'
 import { getFileDataFromExternalAPIService, getFileNamesFromExternalAPIService } from '../../../infraestructure/service/FileServices.mjs'
 
 export const GetFilesWithData = async (_, res) => {
@@ -24,22 +25,7 @@ export const GetFilesWithData = async (_, res) => {
 
     for (let i = 0; i < fileDataResults.length; i++) {
       const fileData = fileDataResults[i]
-      // Este codigo se repite, puede ir en un helper o en un servicio
-      if (fileData) {
-        const splitedData = fileData.split('\n')
-        if (Array.isArray(splitedData)) {
-          splitedData.shift()
-        }
-        for (let j = 0; j < splitedData.length; j++) {
-          try {
-            const fileDataParsed = new CustomFile()
-            fileDataParsed.parseFileData(splitedData[j])
-            dataResponse.push(fileDataParsed)
-          } catch (error) {
-            console.warn('Omitiendo archivo: ' + response[i] + ' debido a un error')
-          }
-        }
-      }
+      parseFileData(fileData, dataResponse)
     }
 
     console.timeEnd('Parseo de archivos')
