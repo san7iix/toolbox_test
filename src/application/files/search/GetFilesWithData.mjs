@@ -38,6 +38,6 @@ export const GetFilesWithData = async (_, res) => {
   } catch (error) {
     console.warn('Error al obtener los nombres de los archivos de la API externa')
     console.error(error)
-    res.status(500).json({ error: 'Internal Server Error' })
+    res.status(500).json({ error: 'Error interno del servidor' })
   }
 }

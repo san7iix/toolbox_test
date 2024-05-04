@@ -11,7 +11,7 @@ const getFileNamesFromExternalAPIService = async () => {
 
 const getFileDataFromExternalAPIService = async (fileName) => {
 
-  if (!fileName) throw new Error('fileName is required')
+  if (!fileName) throw new Error('El parametro fileName es requerido')
 
   return await GET(EXTERNAL_API_URL + EXTERNAL_API_ROUTES.GET_FILE_DATA + '/' + fileName, true)
 }

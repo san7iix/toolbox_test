@@ -15,7 +15,7 @@ filesRoutes.get('/data', (req, res) => {
         GetFileData(req, res)
     } catch (error) {
         console.error(error)
-        res.status(500).json({ error: 'Internal Server Error' })
+        res.status(500).json({ error: 'Error interno del servidor' })
     }
 })
 filesRoutes.get('/list', (req, res) => {
@@ -23,7 +23,7 @@ filesRoutes.get('/list', (req, res) => {
         GetFilesList(req, res)
     } catch (error) {
         console.error(error)
-        res.status(500).json({ error: 'Internal Server Error' })
+        res.status(500).json({ error: 'Error interno del servidor' })
     }
 })
 

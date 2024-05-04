@@ -14,7 +14,7 @@ const GET = async (url, withBearer = false) => {
     })
     return data
   } catch (error) {
-    throw new Error('Error in GET request')
+    throw new Error('Error al realizar la petición GET')
   }
 }
 

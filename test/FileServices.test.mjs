@@ -5,7 +5,7 @@ import { parseFileData } from "../src/infraestructure/helpers/FUNCTIONS.mjs";
 import CustomFile from "../src/domain/File.mjs";
 
 describe('Files service', () => {
-  it('should return file names from external API', async () => {
+  it('Debe retornar una lista con los nombres de los archivos y deben ser de tipo string', async () => {
     // Debería retornar un array de nombres de archivos (strings)
     const files = await getFileNamesFromExternalAPIService();
 
@@ -22,7 +22,7 @@ describe('Files service', () => {
 
   });
 
-  it('Should return file data from external API', async () => {
+  it('Debe retornar la información del archivo test3.csv correctamente', async () => {
     // Debería retornar un string con los datos del archivo
     const fileData = await getFileDataFromExternalAPIService('test3.csv');
 
@@ -34,7 +34,7 @@ describe('Files service', () => {
 
   });
 
-  it('Should throw an error when fileName is not provided', async () => {
+  it('Debe hacer un throw al no enviar el parametro del nombre de archivo (Filename)', async () => {
     // Debería retornar un error cuando no se provee el nombre del archivo
     try {
       await getFileDataFromExternalAPIService();
@@ -44,7 +44,7 @@ describe('Files service', () => {
     }
   });
 
-  it('Should return an error when fileName is not found', async () => {
+  it('Debe retornar un error al intentar consultar un nombre de archivo que no existe', async () => {
     // Debería retornar un error cuando el archivo no es encontrado
     try {
       await getFileDataFromExternalAPIService('random.csv');
@@ -54,7 +54,7 @@ describe('Files service', () => {
     }
   });
 
-  it('Should return a fileData and can parse it', async () => {
+  it('Debe retornar la data del archivo test3.csv y retornarla en la forma JSON', async () => {
     // Debería retornar un array de CustomFile
     const fileName = 'test3.csv'
     const fileData = await getFileDataFromExternalAPIService(fileName);
@@ -76,7 +76,7 @@ describe('Files service', () => {
 
   });
 
-  it("Should return a empty array", async () => {
+  it("Debe retornar un array vacío", async () => {
     // Debería retornar un array de CustomFile
     const fileData = await getFileDataFromExternalAPIService('test1.csv');
 

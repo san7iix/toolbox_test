@@ -7,7 +7,7 @@ export const GetFileData = async (req, res) => {
         const { fileName } = req.query
 
         if (!fileName) {
-            res.status(400).json({ error: 'fileName is required' })
+            res.status(400).json({ error: 'El parametro fileName es requerido' })
             return
         }
 
@@ -19,7 +19,7 @@ export const GetFileData = async (req, res) => {
 
         res.status(200).json(dataResponse)
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' })
+        res.status(500).json({ error: 'Error interno del servidor' })
     }
 
 }
